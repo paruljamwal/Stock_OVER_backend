@@ -11,7 +11,15 @@ const productSchema = new mongoose.Schema(
   {
     image: { type: String, require: true },
     name: { type: String, require: true },
-    price:{type:Number, require:true}
+    price:{type:Number, require:true},
+    assembly:{type:String},
+    color:{type:String},
+    material:{type:String},
+    age:{type:Number},
+    types:{type:String},
+    brands:{type:String},
+    features:{type:String},
+    availabilty:{type:String}
   },
   {
     timestamps: true,
@@ -21,9 +29,34 @@ const productSchema = new mongoose.Schema(
 
 //schema ends*******************************
 
+//searchbar**************************
+
+const searchSchema = new mongoose.Schema(
+  {
+    image: { type: String, require: true },
+    name: { type: String, require: true },
+    price:{type:Number, require:true},
+    assembly:{type:String},
+    color:{type:String},
+    material:{type:String},
+    age:{type:Number},
+    types:{type:String},
+    brands:{type:String},
+    features:{type:String},
+    availabilty:{type:String}
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
+
+
 //Model**********************************
 
 const Product = mongoose.model("product", productSchema);
+
+const Search = mongoose.model("search", searchSchema);
 
 //model ends*****************************
 
@@ -103,6 +136,12 @@ app.delete("/products/:id", async (req, res) => {
       .send({ message: "Something went wrong try again later" });
   }
 });
+
+
+
+
+
+
 
 app.listen(8080, async () => {
   try {
