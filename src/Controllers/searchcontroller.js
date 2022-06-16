@@ -29,7 +29,7 @@ router.post("/search", async (req, res) => {
   
 router.get("/search/:name", async (req, res) => {
     try {
-      const search = await Search.findOne(req.query.name).lean().exec();
+      const search = await Search.find({name:req.query.name}).lean().exec();
       return res.status(200).send(search);
     } catch (error) {
       return res
