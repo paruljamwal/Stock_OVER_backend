@@ -11,7 +11,8 @@ const Product = require("../Models/Product.model")
 
 router.get("/products", async (req, res) => {
     try {
-      const products = await Product.find().lean().exec();
+      const {page=1,limit=10}=req.query;
+      const products = await Product.find().limit(limit*1).skip((page-1)*limit).lean().exec();
       return res.status(200).send({ products: products });
     } catch (error) {
       return res
