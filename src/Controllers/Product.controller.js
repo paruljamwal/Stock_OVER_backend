@@ -38,7 +38,7 @@ router.get("/products", async (req, res) => {
   router.get("/products/:id", async (req, res) => {
     try {
       const product = await Product.findById(req.params.id).lean().exec();
-      return res.status(200).send(products);
+      return res.status(200).send(product);
     } catch (error) {
       return res
         .status(500)
@@ -55,7 +55,7 @@ router.get("/products", async (req, res) => {
       })
         .lean()
         .exec();
-      return res.status(200).send({ deleteProduct: products });
+      return res.status(200).send({ deleteProduct: product });
     } catch (error) {
       return res
         .status(500)
