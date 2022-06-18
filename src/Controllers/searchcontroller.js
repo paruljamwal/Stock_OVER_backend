@@ -1,16 +1,16 @@
 const express=require('express')
 const router=express.Router()
 const Search=require("../Models/searchmodel")
-router.get("/search", async (req, res) => {
-    try {
-      const search = await Search.find().lean().exec();
-      return res.status(200).send({search});
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: "Something went wrong try again later" });
-    }
-  });
+// router.get("/search", async (req, res) => {
+//     try {
+//       const search = await Search.find().lean().exec();
+//       return res.status(200).send({search});
+//     } catch (error) {
+//       return res
+//         .status(500)
+//         .send({ message: "Something went wrong try again later" });
+//     }
+//   });
   
   //2.post
   
@@ -29,7 +29,8 @@ router.post("/search", async (req, res) => {
   
 router.get("/search/:name", async (req, res) => {
     try {
-      const search = await Search.find({name:req.query.name}).lean().exec();
+      const regex= new RegExp(req.params.name);
+      const search = await Search.find({name:regex}).lean().exec();
       return res.status(200).send(search);
     } catch (error) {
       return res
